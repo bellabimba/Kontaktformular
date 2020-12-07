@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF8">
+    <title id="titleID">Fehler</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/Kontakt.js"></script>
+    <script src="js/KontakteSpeicher.js"></script>
+    <script src="js/Ereignisbehandlung.js"></script>
+</head>
+
+<!-- Beim Laden der Seite wird kontaktBearbeitenInit aufgerufen, wo die ID aus der URL geparst wird.
+     Anhand der ID kann der Kontakt gelesen werden (aus dem KontakteSpeicher) und die Kontaktinfos werden zur
+     Vorbelegung der Felder genutzt. 
+
+     Bitte entsprechenden Code einfügen.
+    -->
+<body onload = "kontaktBearbeitenInit()">
+    <input type="hidden" id="idSaver" value="">
+    <div class="main-sheet">
+        <fieldset class="bearbeiten-fieldset">
+            <legend id="legendID">Fehler</legend>
+            <div class="bearbeiten-form">
+                <div class="form-row">
+                    <label>
+                        <span class="form-label">Name:</span>
+                        <input id="nameID" type="text" value="" disabled>
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span class="form-label">E-Mail:</span>
+                        <input id="emailID" type="email" value="" required>
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span class="form-label">Postleitzahl:</span>
+                        <input id="plzID" type="number" value="" required>
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span class="form-label">Ort:</span>
+                        <input id="ortID" type="text" value="" required>
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span class="form-label">Strasse und Hausnummer:</span>
+                        <input id="strasseID" type="text" value="" required>
+                    </label>
+                </div>
+            </div>
+            <div class="ok-cancel-button-box">
+                <a class="button-link" href="SuchDialog.html">
+                    <input class="button" type="button" value="abbrechen">                    
+                </a>
+                <!-- Beim Klick auf den Button wird die Funktion kontaktSpeichern aufgerufen. 
+
+                     Bitte entsprechenden Code einfügen.
+                -->
+                <input class="button" type="button" value="speichern" onclick="kontaktSpeichern()">
+            </div>
+        </fieldset>
+    </div>
+</body>
+</html>

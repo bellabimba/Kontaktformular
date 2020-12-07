@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF8">
+    <title>Kontakte</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="js/Kontakt.js"></script>
+    <script src="js/KontakteSpeicher.js"></script>
+    <script src="js/Ereignisbehandlung.js"></script>
+</head>
+
+<!-- Während des Ladens der Seite soll die Funktion belegeKontakteTabelle aufgerufen werden.
+
+     Bitte entsprechenden Code einfügen.
+-->  
+<body onload = "belegeKontakteTabelle()">
+    <div class="main-sheet">
+        <fieldset>
+            <legend>Kontakte suchen</legend>
+            <div class="filter-form">
+                <div class="form-row">
+                    <label>
+                        <span class="form-label">Name</span>
+                        <input id="nameID" class="filter-name" name="name" type="text" value="" />
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span class="form-label">Ort</span>
+                        <input id="ortID" class="filter-ort" name="ort" type="text" value="" />
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label>
+                        <span class="form-label">Sortierung</span>
+                        <select id="sortierungID" class="filter-sortierung">
+                            <option>Name</option>
+                            <option>PLZ</option>
+                            <option selected>Ort</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="filter-button-box">
+                <!-- kontakteSuchen wird aufgerufen, wenn der Such-Button geklickt wird 
+                
+                 Bitte entsprechenden Code einfügen.
+                -->
+                <button onclick = "kontakteSuchen()" class="button filter-button">
+                    <img src="images/search.png" class="button-image">
+                </button>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Gefundene Kontakte</legend>
+            <!-- die Seite KontaktBearbeiten.html wird aufgerufen, wenn der Neu-Button geklickt wird.
+                 Als Parameter muss die id mit dem Wert -1 übergeben werden. 
+                 Beim Editieren eines Kontakts wird dann die tatsächliche ID des Kontakts übergeben. 
+                
+                 Bitte entsprechenden Code einfügen.
+
+                -->
+            
+            <button type="button" onclick="kontaktBearbeitenInit('-1')" class="button" data-toggle="modal" data-target="#formModal">
+                <img class="button-image" src="images/plus.png">
+            </button>
+            
+            <div class="container">
+                <input type="hidden" id="idSaver" value="">
+                <div class="modal" id="formModal">
+                    <legend id="legendID">Fehler</legend>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h6 class="modal-title" id="titleID">Kontakt anlegen</h6>
+                            </div>
+                
+                            <!-- Eingabefelder/Form -->
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for='name' class='col-3 col-form-label'>Name</label>
+                                    <div class="col-9">
+                                        <input type="text" id="nameID" class="form-control" placeholder="Bitte Namen eingeben">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for='email' class='col-3 col-form-label'>E-Mail</label>
+                                    <div class="col-9">
+                                        <input type="email" id="emailID" class="form-control" placeholder="Bitte E-Mail eingeben">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for='ort' class='col-3 col-form-label'>Ort</label>
+                                    <div class="col-9">
+                                        <input type="text" id="ortID" class="form-control" placeholder="Bitte Ort eingeben">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for='plz' class='col-3 col-form-label'>Postleitzahl</label>
+                                    <div class="col-9">
+                                        <input type="number" id="plzID" class="form-control" placeholder="Bitte ganze Zahl >0 eingeben">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for='strasse' class='col-3 col-form-label'>Strasse und Hausnr.</label>
+                                    <div class="col-9">
+                                        <input type="text" id="strasseID" class="form-control" placeholder="Bitte Strasse und Hausnummer eingeben">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type = "button" class="btn btn-secondary" data-dismiss="modal">abbrechen</button>
+                                <button type = "button" onclick="kontaktSpeichern()" class="btn btn-primary" data-dismiss="modal">speichern</button>     
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+            </div>
+        
+    
+            <table id="kontakteTabelle" class="kontakt-table">
+                <tr>
+                    <th>Name</th>
+                    <th>E-Mail</th>
+                    <th>Ort</th>
+                    <th>PLZ</th>
+                    <th>Strasse + Nummer</th>
+                    <th>Aktion</th>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+
+</html>
