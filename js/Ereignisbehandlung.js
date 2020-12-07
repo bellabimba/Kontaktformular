@@ -55,13 +55,7 @@ function kontaktSpeichern() {
     var kontakt = null;
     
     if (id === '-1'){
-        var kontaktNeu = new Kontakt();
-        kontaktNeu.name = document.getElementById("nameID").value;
-        kontaktNeu.email = document.getElementById("emailID").value;
-        kontaktNeu.ort = document.getElementById("ortID").value;
-        kontaktNeu.plz = document.getElementById("plzID").value;
-        kontaktNeu.strasse = document.getElementById("strasseID").value;
-        
+        var kontakt = new Kontakt();
     } else {
         kontakt = kontakteSpeicher.findeKontaktZuId(id);
     }
@@ -72,9 +66,9 @@ function kontaktSpeichern() {
         kontakt.strasse = document.getElementById("strasseID").value;
         
     try {
-        kontaktNeu.pruefe();
+        kontakt.pruefe();
         if (id === '-1'){
-            kontakteSpeicher.neuerKontakt(kontaktNeu);
+            kontakteSpeicher.neuerKontakt(kontakt);
         } else {
             kontakteSpeicher.aktualisiereKontakt(kontakt);
         }
